@@ -1,9 +1,9 @@
-import { useRef } from "react";
+import { useRef, useEffect } from 'react';
 
-import Card from "../ui/Card";
-import classes from "./NewWorkoutForm.module.css";
+import Card from '../ui/Card';
+import classes from './NewWorkoutForm.module.css';
 
-function NewWorkoutForm(props) {
+function EditWorkoutForm(props) {
   const titleInputRef = useRef();
   const imageInputRef = useRef();
   const descriptionInputRef = useRef();
@@ -46,9 +46,14 @@ function NewWorkoutForm(props) {
       checkbox: enteredCheckbox,
     };
 
-    console.log(workoutData);
-    props.onAddWorkout(workoutData);
+    props.onEditWorkout(workoutData);
   }
+
+  useEffect(() => {
+    titleInputRef.current.value = props.workout.title;
+    imageInputRef.current.value = props.workout.image;
+    descriptionInputRef.current.value = props.workout.description;
+  }, []);
 
   return (
     <Card>
@@ -142,4 +147,4 @@ function NewWorkoutForm(props) {
   );
 }
 
-export default NewWorkoutForm;
+export default EditWorkoutForm;

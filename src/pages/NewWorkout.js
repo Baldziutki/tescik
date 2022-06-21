@@ -1,6 +1,5 @@
-import { useNavigate } from "react-router-dom";
-
-import NewWorkoutForm from "../components/workouts/NewWorkoutForm";
+import { useNavigate } from 'react-router-dom';
+import NewWorkoutForm from '../components/workouts/NewWorkoutForm';
 
 function NewWorkoutPage() {
   const navigate = useNavigate();
@@ -19,16 +18,14 @@ function NewWorkoutPage() {
       navigate("/", { replace: true });
     });
   }*/
+  
   function addWorkoutHandler(workoutData) {
-    const workouts = JSON.parse(localStorage.getItem('workouts')??'{}');
-    workouts[Math.random().toString(36).slice(2)]=workoutData;
+    const workouts = JSON.parse(localStorage.getItem('workouts') ?? '{}');
+    workouts[Math.random().toString(36).slice(2)] = workoutData;
     localStorage.setItem('workouts', JSON.stringify(workouts));
 
-    navigate("/",{replace: true});
+    navigate('/', { replace: true });
   }
-
-
-
 
   return (
     <section>

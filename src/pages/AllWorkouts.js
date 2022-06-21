@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-import WorkoutList from "../components/workouts/WorkoutList";
+import WorkoutList from '../components/workouts/WorkoutList';
 
 function AllWorkoutsPage() {
   const [isLoading, setIsLoading] = useState(true);
-  const [loadedMeetups, setLoadedWorkouts] = useState([]);
+  const [workouts, setLoadedWorkouts] = useState({});
 
   /*useEffect(() => {
     fetch("https://projekt-pai-58a0e-default-rtdb.firebaseio.com/workouts.json")
@@ -29,21 +29,11 @@ function AllWorkoutsPage() {
   }, []);*/
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem('workouts')??'{}');
-    const workouts = [];
-    for (const key in data) {
-      const workout = {
-        id: key,
-        ...data[key],
-      };
-
-      workouts.push(workout);
-    }
+    const data = JSON.parse(localStorage.getItem('workouts') ?? '{}');
 
     setIsLoading(false);
-    setLoadedWorkouts(workouts);
-
-  }, [])
+    setLoadedWorkouts(data);
+  }, []);
 
   if (isLoading) {
     return (
@@ -56,7 +46,7 @@ function AllWorkoutsPage() {
   return (
     <section>
       <h1>All Workouts</h1>
-      <WorkoutList workouts={loadedMeetups} />
+      <WorkoutList workouts={workouts} setLoadedWorkouts={setLoadedWorkouts} />
     </section>
   );
 }
